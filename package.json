@@ -16,8 +16,7 @@
     "test:typescript": "tsc --noEmit",
     "tsc:sync": "npx typesync",
     "tsc": "tsc",
-    "validate": "yarn lint && yarn test:typescript && yarn test:flow && yarn test && yarn monolinter",
-    "prepare": "yarn build"
+    "validate": "yarn lint && yarn test:typescript && yarn test:flow && yarn test && yarn monolinter"
   },
   "repository": {
     "type": "git",
