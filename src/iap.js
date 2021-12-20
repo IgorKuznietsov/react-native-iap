@@ -46,18 +46,16 @@ export var getInstallSourceAndroid = function () {
         : InstallSourceAndroid.AMAZON;
 };
 var checkNativeAndroidAvailable = function () {
-    if (!RNIapModule && !RNIapAmazonModule) {
+    if (!RNIapModule && !RNIapAmazonModule)
         throw new Error(IAPErrorCode.E_IAP_NOT_AVAILABLE);
-    }
 };
 var getAndroidModule = function () {
     checkNativeAndroidAvailable();
     return RNIapModule ? RNIapModule : RNIapAmazonModule;
 };
 var checkNativeiOSAvailable = function () {
-    if (!RNIapIos) {
+    if (!RNIapIos)
         throw new Error(IAPErrorCode.E_IAP_NOT_AVAILABLE);
-    }
 };
 var getIosModule = function () {
     checkNativeiOSAvailable();
@@ -118,9 +116,8 @@ var fillProductsAdditionalData = function (products) { return __awaiter(void 0, 
                 currency_1 = currencies[user.userMarketplaceAmazon];
                 // Add currency to products
                 products.forEach(function (product) {
-                    if (currency_1) {
+                    if (currency_1)
                         product.currency = currency_1;
-                    }
                 });
                 _a.label = 2;
             case 2: return [2 /*return*/, products];
@@ -260,12 +257,11 @@ export var requestPurchase = function (sku, andDangerouslyFinishTransactionAutom
     return (Platform.select({
         ios: function () { return __awaiter(void 0, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                if (andDangerouslyFinishTransactionAutomaticallyIOS) {
+                if (andDangerouslyFinishTransactionAutomaticallyIOS)
                     // eslint-disable-next-line no-console
                     console.warn(
                     // eslint-disable-next-line max-len
                     'You are dangerously allowing react-native-iap to finish your transaction automatically. You should set andDangerouslyFinishTransactionAutomatically to false when calling requestPurchase and call finishTransaction manually when you have delivered the purchased goods to the user. It defaults to true to provide backwards compatibility. Will default to false in version 4.0.0.');
-                }
                 return [2 /*return*/, getIosModule().buyProduct(sku, andDangerouslyFinishTransactionAutomaticallyIOS)];
             });
         }); },
@@ -295,12 +291,11 @@ export var requestSubscription = function (sku, andDangerouslyFinishTransactionA
     return (Platform.select({
         ios: function () { return __awaiter(void 0, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                if (andDangerouslyFinishTransactionAutomaticallyIOS) {
+                if (andDangerouslyFinishTransactionAutomaticallyIOS)
                     // eslint-disable-next-line no-console
                     console.warn(
                     // eslint-disable-next-line max-len
                     'You are dangerously allowing react-native-iap to finish your transaction automatically. You should set andDangerouslyFinishTransactionAutomatically to false when calling requestPurchase and call finishTransaction manually when you have delivered the purchased goods to the user. It defaults to true to provide backwards compatibility. Will default to false in version 4.0.0.');
-                }
                 return [2 /*return*/, getIosModule().buyProduct(sku, andDangerouslyFinishTransactionAutomaticallyIOS)];
             });
         }); },
@@ -340,22 +335,17 @@ export var finishTransaction = function (purchase, isConsumable, developerPayloa
         }); },
         android: function () { return __awaiter(void 0, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                if (purchase) {
-                    if (isConsumable) {
+                if (purchase)
+                    if (isConsumable)
                         return [2 /*return*/, getAndroidModule().consumeProduct(purchase.purchaseToken, developerPayloadAndroid)];
-                    }
                     else if (purchase.userIdAmazon ||
                         (!purchase.isAcknowledgedAndroid &&
-                            purchase.purchaseStateAndroid === PurchaseStateAndroid.PURCHASED)) {
+                            purchase.purchaseStateAndroid === PurchaseStateAndroid.PURCHASED))
                         return [2 /*return*/, getAndroidModule().acknowledgePurchase(purchase.purchaseToken, developerPayloadAndroid)];
-                    }
-                    else {
+                    else
                         throw new Error('purchase is not suitable to be purchased');
-                    }
-                }
-                else {
+                else
                     throw new Error('purchase is not assigned');
-                }
                 return [2 /*return*/];
             });
         }); },
@@ -394,7 +384,7 @@ export var acknowledgePurchaseAndroid = function (token, developerPayload) {
  */
 export var deepLinkToSubscriptionsAndroid = function (sku) {
     checkNativeAndroidAvailable();
-    return Linking.openURL("https://play.google.com/store/account/subscriptions?package=".concat(RNIapModule.getPackageName(), "&sku=").concat(sku));
+    return Linking.openURL("https://play.google.com/store/account/subscriptions?package=" + RNIapModule.getPackageName() + "&sku=" + sku);
 };
 /**
  * Should Add Store Payment (iOS only)
@@ -426,11 +416,10 @@ var fetchJsonOrThrow = function (url, receiptBody) { return __awaiter(void 0, vo
                 })];
             case 1:
                 response = _a.sent();
-                if (!response.ok) {
+                if (!response.ok)
                     throw Object.assign(new Error(response.statusText), {
                         statusCode: response.status,
                     });
-                }
                 return [2 /*return*/, response.json()];
         }
     });
@@ -511,8 +500,8 @@ export var validateReceiptAndroid = function (packageName, productId, productTok
             case 0:
                 type = isSub ? 'subscriptions' : 'products';
                 url = 'https://androidpublisher.googleapis.com/androidpublisher/v3/applications' +
-                    "/".concat(packageName, "/purchases/").concat(type, "/").concat(productId) +
-                    "/tokens/".concat(productToken, "?access_token=").concat(accessToken);
+                    ("/" + packageName + "/purchases/" + type + "/" + productId) +
+                    ("/tokens/" + productToken + "?access_token=" + accessToken);
                 return [4 /*yield*/, fetch(url, {
                         method: 'GET',
                         headers: {
@@ -521,11 +510,10 @@ export var validateReceiptAndroid = function (packageName, productId, productTok
                     })];
             case 1:
                 response = _a.sent();
-                if (!response.ok) {
+                if (!response.ok)
                     throw Object.assign(new Error(response.statusText), {
                         statusCode: response.status,
                     });
-                }
                 return [2 /*return*/, response.json()];
         }
     });
@@ -548,7 +536,7 @@ export var validateReceiptAmazon = function (developerSecret, userId, receiptId,
             switch (_a.label) {
                 case 0:
                     sandoboxUrl = useSandbox ? 'sandbox/' : '';
-                    url = "https://appstore-sdk.amazon.com/".concat(sandoboxUrl, "version/1.0/verifyReceiptId/developer/").concat(developerSecret, "/user/").concat(userId, "/receiptId/").concat(receiptId);
+                    url = "https://appstore-sdk.amazon.com/" + sandoboxUrl + "version/1.0/verifyReceiptId/developer/" + developerSecret + "/user/" + userId + "/receiptId/" + receiptId;
                     return [4 /*yield*/, fetch(url, {
                             method: 'GET',
                             headers: {
@@ -557,11 +545,10 @@ export var validateReceiptAmazon = function (developerSecret, userId, receiptId,
                         })];
                 case 1:
                     response = _a.sent();
-                    if (!response.ok) {
+                    if (!response.ok)
                         throw Object.assign(new Error(response.statusText), {
                             statusCode: response.status,
                         });
-                    }
                     return [2 /*return*/, response.json()];
             }
         });
@@ -574,9 +561,8 @@ export var validateReceiptAmazon = function (developerSecret, userId, receiptId,
 export var purchaseUpdatedListener = function (listener) {
     var myModuleEvt = new NativeEventEmitter(getNativeModule());
     var emitterSubscription = myModuleEvt.addListener('purchase-updated', listener);
-    if (Platform.OS === 'android') {
+    if (Platform.OS === 'android')
         getAndroidModule().startListening();
-    }
     return emitterSubscription;
 };
 /**

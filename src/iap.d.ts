@@ -1,5 +1,5 @@
-import * as Amazon from './types/amazon';
 import * as Android from './types/android';
+import * as Amazon from './types/amazon';
 import * as Apple from './types/apple';
 import { EmitterSubscription } from 'react-native';
 import { InAppPurchase, InstallSourceAndroid, Product, ProductPurchase, ProrationModesAndroid, PurchaseError, PurchaseResult, Subscription, SubscriptionPurchase } from './types';

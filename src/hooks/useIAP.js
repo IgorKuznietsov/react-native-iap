@@ -104,12 +104,10 @@ export function useIAP() {
                     err_1 = _a.sent();
                     throw err_1;
                 case 3:
-                    if (purchase.productId === (currentPurchase === null || currentPurchase === void 0 ? void 0 : currentPurchase.productId)) {
+                    if (purchase.productId === (currentPurchase === null || currentPurchase === void 0 ? void 0 : currentPurchase.productId))
                         setCurrentPurchase(undefined);
-                    }
-                    if (purchase.productId === (currentPurchaseError === null || currentPurchaseError === void 0 ? void 0 : currentPurchaseError.productId)) {
+                    if (purchase.productId === (currentPurchaseError === null || currentPurchaseError === void 0 ? void 0 : currentPurchaseError.productId))
                         setCurrentPurchaseError(undefined);
-                    }
                     return [7 /*endfinally*/];
                 case 4: return [2 /*return*/];
             }

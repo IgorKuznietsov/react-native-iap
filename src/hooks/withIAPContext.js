@@ -52,9 +52,8 @@ var IAPEmitter = new NativeEventEmitter(RNIapIos);
 var IAPContext = React.createContext(null);
 export function useIAPContext() {
     var ctx = useContext(IAPContext);
-    if (!ctx) {
+    if (!ctx)
         throw new Error('You need wrap your app with withIAPContext HOC');
-    }
     return ctx;
 }
 export function withIAPContext(Component) {
@@ -103,9 +102,8 @@ export function withIAPContext(Component) {
             initConnection().then(setConnected);
         }, []);
         useEffect(function () {
-            if (!connected) {
+            if (!connected)
                 return;
-            }
             var purchaseUpdateSubscription = purchaseUpdatedListener(function (purchase) { return __awaiter(_this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
                     setCurrentPurchaseError(undefined);
